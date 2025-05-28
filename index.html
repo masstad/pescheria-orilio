@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Pescheria Orilio - Grottaferrata</title>
+		<style>
+    body {
+      font-family: sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 1rem;
+      color: #222;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .date {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+    li img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 1rem;
+    }
+    .contacts {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .contacts a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.8rem 1.2rem;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      color: white;
+    }
+    .whatsapp { background: #25D366; }
+    .phone    { background: #007AFF; }
+    .instagram { background: #C13584; }
+	.prodotto {
+      display: flex;
+      align-items: center;
+      margin: 0.5rem 0;
+    }
+    .prodotto img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      margin-right: 1rem;
+      border-radius: 8px;
+    }
+	.info {
+      display: flex;
+      flex-direction: column;
+    }
+    .nome {
+      font-weight: bold;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #444;
+    }
+	.categoria {
+      margin-bottom: 2rem;
+    }
+
+    .categoria h2 {
+      color: #0a3d62;
+      border-bottom: 2px solid #0a3d62;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-left {
+      flex: 1;
+    }
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<h1>Pescheria Orilio</h1>
+			<p style="text-align: center; margin-top: -0.5rem; color: #555;">
+				<a href="https://www.google.it/maps/place/Via+delle+Sorgenti+di+Squarciarelli,+18,+00046+Grottaferrata+RM/@41.7834936,12.6759476,1299m/data=!3m2!1e3!4b1!4m6!3m5!1s0x1325868e077440e7:0x135550da53d035a2!8m2!3d41.7834936!4d12.6785225!16s%2Fg%2F11rg66whyh?entry=ttu&g_ep=EgoyMDI1MDUyNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: inherit;">
+					📍 Via delle Sorgenti 18, 00046 Grottaferrata (RM)
+				</a>
+			</p>
+			<div class="date" id="menu-date"></div>
+		</header>
+
+		<ul id="menu-list">
+			<!-- Prodotti caricati da Google Sheet -->
+		</ul>
+
+		<div class="contacts">
+			<a class="whatsapp" href="https://wa.me/335453411" target="_blank">WhatsApp</a>
+			<a class="phone" href="tel:33812312345">Chiama</a>
+			<a class="instagram" href="https://www.instagram.com/pescheria.orilio/" target="_blank">Instagram</a>
+		</div>
+	  
+		<footer style="text-align: center; padding: 1rem; font-size: 0.9rem; color: #555;">
+			<a href="https://www.google.it/maps/place/Via+delle+Sorgenti+di+Squarciarelli,+18,+00046+Grottaferrata+RM/@41.7834936,12.6759476,1299m/data=!3m2!1e3!4b1!4m6!3m5!1s0x1325868e077440e7:0x135550da53d035a2!8m2!3d41.7834936!4d12.6785225!16s%2Fg%2F11rg66whyh?entry=ttu&g_ep=EgoyMDI1MDUyNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: inherit;">
+				📍 Via delle Sorgenti 18, 00046 Grottaferrata (RM)
+			</a>
+			<br>
+			
+			<!--
+				☎️ <a href="tel:33812312345">338 123 12345</a> • 
+				📱 <a href="https://wa.me/39335453411">WhatsApp</a> • 
+				📸 <a href="https://www.instagram.com/pescheriaorilio" target="_blank">Instagram</a>
+			-->
+		</footer>
+
+
+		<script>
+		
+			// Calcola il prossimo venerdì
+			function getNextFridayDate() {
+				const today = new Date();
+				const nextFriday = new Date();
+				nextFriday.setDate(today.getDate() + ((5 - today.getDay() + 7) % 7 || 7));
+				return nextFriday.toLocaleDateString("it-IT", {
+					weekday: 'long',
+					day: '2-digit',
+					month: 'long',
+					year: 'numeric'
+				});
+			}
+
+			document.getElementById("menu-date").textContent = "Menù di " + getNextFridayDate();
+
+			// Dati da Google Sheet
+			const SHEET_ID = '1qZY-wc-woWR0B7NEtKga4RoNU4drEnY-5D-LnFZWPKo';
+			const SHEET_TAB = '1';
+			const URL = 'https://opensheet.elk.sh/' + SHEET_ID + '/' + SHEET_TAB;
+		
+			fetch(URL)
+				.then(res => res.json())
+				.then(data => {
+				
+					const menuContainer = document.getElementById('menu-list');
+					const categorie = {};
+
+					// Raggruppa per categoria
+					data.forEach(item => {
+						if (item.Disponibile && item.Disponibile.toUpperCase() === "SI") {
+							if (!categorie[item.Categoria]) {
+								categorie[item.Categoria] = [];
+							}
+							categorie[item.Categoria].push(item);
+						}
+					});
+
+					// Mostra categorie e prodotti
+					for (const categoria in categorie) {
+						const section = document.createElement('div');
+						section.className = 'categoria';
+						section.innerHTML = `<h2>${categoria}</h2>`;
+
+						categorie[categoria].forEach(prodotto => {
+							const card = document.createElement('div');
+							card.className = 'card';
+							card.innerHTML = `
+							<div class="card-left">
+								<div class="nome">${prodotto.Prodotto}</div>
+								${prodotto.Note ? `<div class="note">${prodotto.Note}</div>` : ''}
+							</div>
+						`;
+						section.appendChild(card);
+					});
+
+				  menuContainer.appendChild(section);
+				  
+				}
+			})
+		
+			.catch(err => {
+				console.error("Errore nel caricamento del menu:", err);
+				document.getElementById("menu-list").innerHTML = '<li>Impossibile caricare il menu.</li>';
+			});
+		</script>
+	</body>
+</html>
